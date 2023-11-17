@@ -1,3 +1,5 @@
+//ASSIGNMENT NO 1
+
 use('company')
 
 db.createCollection('Abhishek')
@@ -83,4 +85,60 @@ db.employee.find({"hobbies":{$in:['reading','painting']}});
 //20.List the first hobby of all employees from the employee collection.
 
 //21. List the names of all employees those having three different hobbies.
+
+//ASSIGNMENT NO 2A 
+
+// Problem Statement
+// Implement aggregation with customer collection using MongoDB. Customer collection consist of
+// following data
+// > db.customer.find();
+// { "_id" : ObjectId("54265694517b30434f6a2bdc"), "custID" : "A123", "Amount" : 500, "status" :
+// "A" }
+// { "_id" : ObjectId("542656eb517b30434f6a2bdd"), "custID" : "A123", "Amount" : 250, "status" :
+// "A" }
+// { "_id" : ObjectId("54265726517b30434f6a2bde"), "custID" : "B212", "Amount" : 200, "status" :
+// "A" }
+// { "_id" : ObjectId("54265757517b30434f6a2bdf"), "custID" : "A123", "Amount" : 300, "status" :
+// "D" }
+
+//create a new collection
+db.createCollection('customer');
+
+//inserting Data into collection
+
+db.customer.insertOne({"custID" : "A123", "Amount" : 500, "status" :
+"A" });
+
+db.customer.insertOne({"custID" : "A123", "Amount" : 250, "status" :
+"A" });
+
+db.customer.insertOne({"custID" : "B212", "Amount" : 200, "status" :
+"A" });
+
+db.customer.insertOne({"custID" : "A123", "Amount" : 300, "status" :
+"D" });
+
+//PART A 
+
+//1. Find the total amount of each customer.
+db.customer.aggregate([{$group:{_id:"$custID",totalAmount:{$sum:"$Amount"}}}]);
+
+//2. Find the total amount of each customer whose status is A
+
+db.customer.aggregate([{$match:{"status":"A"}},{$group:{_id:"$custID",totalAmount:{$sum:"$Amount"}}}]);
+
+//3. Find the minimum amount of each customer whose status is A
+db.customer.aggregate([{$match:{"status":"A"}},{$group:{_id:"$custID",MinAmount:{$min:"$Amount"}}}]);
+
+//4. Find the maximum amount of each customer whose status is A
+db.customer.aggregate([{$match:{"status":"A"}},{$group:{_id:"$custID",MinAmount:{$max:"$Amount"}}}]);
+
+//5. Find the Average amount of each customer whose status is A
+db.customer.aggregate([{$match:{"status":"A"}},{$group:{_id:"$custID",MinAmount:{$avg:"$Amount"}}}]);
+
+// PART B 
+
+
+
+
 
