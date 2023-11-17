@@ -138,6 +138,15 @@ db.customer.aggregate([{$match:{"status":"A"}},{$group:{_id:"$custID",MinAmount:
 
 // PART B 
 
+//create an Index on CustID
+
+
+//get index 
+db.customer.getindexes();
+
+//drop index
+db.customer.dropIndex('custID_1');
+
 
 
 
