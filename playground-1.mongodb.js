@@ -147,6 +147,79 @@ db.customer.getindexes();
 //drop index
 db.customer.dropIndex('custID_1');
 
+//ASSIGNMENT 2B :
+
+db.students.insertOne({
+    "name": "Midhu",
+    "subject": "science",
+    "marks": 68
+});
+
+db.students.insertOne({
+    "name": "Midhu",
+    "subject": "maths",
+    "marks": 98
+});
+
+db.students.insertOne({
+    "name": "Midhu",
+    "subject": "sports",
+    "marks": 77
+});
+
+db.students.insertOne({
+    "name": "Akhil",
+    "subject": "science",
+    "marks": 67
+});
+
+db.students.insertOne({
+    "name": "Akhil",
+    "subject": "maths",
+    "marks": 87
+});
+
+db.students.insertOne({
+    "name": "Akhil",
+    "subject": "sports",
+    "marks": 89
+});
+
+db.students.insertOne({
+    "name": "Anish",
+    "subject": "science",
+    "marks": 67
+});
+
+db.students.insertOne({
+    "name": "Anish",
+    "subject": "maths",
+    "marks": 78
+});
+
+db.students.insertOne({
+    "name": "Anish",
+    "subject": "sports",
+    "marks": 90
+});
+
+//MAP-REDUCE 
+
+//Find average marks of each student
+var map = function(){emit(this.name,this.marks)};
+var reduce = function(name,marks){return Array.avg(marks)}
+db.students.mapReduce(map,reduce,{out:"Result4"});
+db.Result.find();
+
+//find the total marks of eacg student
+var map = function(){emit(this.name,this.marks)};
+var reduce = function(name,marks){return Array.sum(marks)}
+db.students.mapReduce(map,reduce,{out:"Result5"});
+db.Result.find();
+
+
+
+
 
 
 
